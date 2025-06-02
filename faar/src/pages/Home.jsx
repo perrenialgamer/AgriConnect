@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 function Home() {
   return (
-    <div className="container mx-auto px-4 py-8 md:px-8 lg:px-12 bg-white rounded-xl shadow-lg">
+    <div className="container mx-auto px-4 py-8 md:px-8 lg:px-12 bg-white rounded-xl shadow-lg select-none">
       {/* Introduction Banner */}
       <div className="bg-gradient-to-r from-green-500 to-indigo-600 text-white rounded-xl shadow-md p-8 mb-8 text-center">
         <h1 className="text-4xl md:text-5xl font-extrabold mb-4">
@@ -61,7 +61,7 @@ function Home() {
               </p>
             </div>
             <Link
-              to="/crops-prices"
+              to="/vendors"
               className="mt-6 inline-block w-full text-center px-4 py-2 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition duration-300"
             >
               Check Prices

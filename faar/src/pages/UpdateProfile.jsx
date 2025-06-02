@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import StateCitySelector from '../components/StateCitySelector'; // Assuming this component exists
 import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion'; // Import motion from framer-motion
 
 function UpdateProfile() {
   const [city, setCity] = useState("");
@@ -41,7 +42,7 @@ function UpdateProfile() {
     fetchUserProfile();
   }, []);
 
-    const handleLocationChange = ({ state: newState, city: newCity }) => {
+  const handleLocationChange = ({ state: newState, city: newCity }) => {
     if (newState !== state) {
       setState(newState);
       setCity(""); // Reset city if state changes
@@ -56,12 +57,12 @@ function UpdateProfile() {
     setSuccessMsg("");
     setNothingToUpdate(false);
 
-
     // Validation: If state is selected, city must also be selected
-  if (state && !city) {
-    setError("Please select a city after choosing a state.");
-    return;
-  }
+    if (state && !city) {
+      setError("Please select a city after choosing a state.");
+      return;
+    }
+
     // Check if any field has changed
     if (
       fullName === prevFullName &&
@@ -99,21 +100,21 @@ function UpdateProfile() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-gray-100 select-none">
+      <div className="w-full flex items-center justify-center min-h-screen bg-gray-100 select-none">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900"></div>
         <p className="ml-4 text-lg text-gray-700">Loading profile data...</p>
       </div>
     );
   }
 
- {error && (
-  <div className="mt-4 p-3 bg-red-100 text-red-700 rounded-md text-center font-semibold animate-fade-in-down">
-    {error}
-  </div>
-)}
   return (
     <div className="w-full min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full bg-white rounded-xl shadow-2xl overflow-hidden p-8 border border-gray-200">
+      <motion.div
+        initial={{ opacity: 0, y: -50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="max-w-md w-full bg-white rounded-xl shadow-2xl overflow-hidden p-8 border border-gray-200"
+      >
         <div className="text-center mb-8">
           <h2 className="text-4xl font-extrabold text-gray-900 leading-tight">
             Update Profile
@@ -128,7 +129,7 @@ function UpdateProfile() {
             <label htmlFor="fullName" className="block text-sm font-medium text-gray-700">
               Full Name
             </label>
-            <input
+            <motion.input
               type="text"
               id="fullName"
               name="fullName"
@@ -137,6 +138,8 @@ function UpdateProfile() {
               value={fullName}
               onChange={e => setFullName(e.target.value)}
               className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              whileFocus={{ scale: 1.02, borderColor: '#6366f1', boxShadow: '0 0 0 3px rgba(99, 102, 241, 0.25)' }}
+              transition={{ type: "spring", stiffness: 400, damping: 10 }}
             />
           </div>
 
@@ -144,7 +147,7 @@ function UpdateProfile() {
             <label htmlFor="email" className="block text-sm font-medium text-gray-700">
               Email Address
             </label>
-            <input
+            <motion.input
               type="email"
               id="email"
               name="email"
@@ -153,6 +156,8 @@ function UpdateProfile() {
               value={email}
               onChange={e => setEmail(e.target.value)}
               className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              whileFocus={{ scale: 1.02, borderColor: '#6366f1', boxShadow: '0 0 0 3px rgba(99, 102, 241, 0.25)' }}
+              transition={{ type: "spring", stiffness: 400, damping: 10 }}
             />
           </div>
 
@@ -162,30 +167,48 @@ function UpdateProfile() {
             className="w-full" // Add a class for styling if needed within the component
           />
 
-          <button
+          <motion.button
             type="submit"
             className="w-full py-3 px-6 bg-indigo-600 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition duration-300 ease-in-out"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            transition={{ type: "spring", stiffness: 400, damping: 10 }}
           >
             Save Changes
-          </button>
+          </motion.button>
 
           {successMsg && (
-            <div className="mt-4 p-3 bg-green-100 text-green-700 rounded-md text-center font-semibold animate-fade-in-down">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              className="mt-4 p-3 bg-green-100 text-green-700 rounded-md text-center font-semibold"
+            >
               {successMsg}
-            </div>
+            </motion.div>
           )}
           {error && (
-            <div className="mt-4 p-3 bg-red-100 text-red-700 rounded-md text-center font-semibold animate-fade-in-down">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              className="mt-4 p-3 bg-red-100 text-red-700 rounded-md text-center font-semibold"
+            >
               {error}
-            </div>
+            </motion.div>
           )}
           {nothingToUpdate && (
-            <div className="mt-4 p-3 bg-yellow-100 text-yellow-700 rounded-md text-center font-semibold animate-fade-in-down">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              className="mt-4 p-3 bg-yellow-100 text-yellow-700 rounded-md text-center font-semibold"
+            >
               Nothing to update.
-            </div>
+            </motion.div>
           )}
         </form>
-      </div>
+      </motion.div>
     </div>
   );
 }

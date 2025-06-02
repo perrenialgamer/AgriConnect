@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion'; // Import motion
 
 function ChangePassword() {
   const [oldPassword, setOldPassword] = useState("");
@@ -33,7 +34,12 @@ function ChangePassword() {
 
   return (
     <div className="w-full min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 select-none">
-      <div className="max-w-md w-full bg-white rounded-xl shadow-2xl overflow-hidden p-8 border border-gray-200">
+      <motion.div
+        initial={{ opacity: 0, y: -50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="max-w-md w-full bg-white rounded-xl shadow-2xl overflow-hidden p-8 border border-gray-200"
+      >
         <div className="text-center mb-8">
           <h2 className="text-4xl font-extrabold text-gray-900 leading-tight">
             Change Password
@@ -48,7 +54,7 @@ function ChangePassword() {
             <label htmlFor="oldPassword" className="block text-sm font-medium text-gray-700">
               Old Password
             </label>
-            <input
+            <motion.input
               type="password"
               id="oldPassword"
               value={oldPassword}
@@ -56,13 +62,15 @@ function ChangePassword() {
               required
               className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               placeholder="Enter your current password"
+              whileFocus={{ scale: 1.02, borderColor: '#6366f1', boxShadow: '0 0 0 3px rgba(99, 102, 241, 0.25)' }}
+              transition={{ type: "spring", stiffness: 400, damping: 10 }}
             />
           </div>
           <div>
             <label htmlFor="newPassword" className="block text-sm font-medium text-gray-700">
               New Password
             </label>
-            <input
+            <motion.input
               type="password"
               id="newPassword"
               value={newPassword}
@@ -70,27 +78,42 @@ function ChangePassword() {
               required
               className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               placeholder="Enter your new password"
+              whileFocus={{ scale: 1.02, borderColor: '#6366f1', boxShadow: '0 0 0 3px rgba(99, 102, 241, 0.25)' }}
+              transition={{ type: "spring", stiffness: 400, damping: 10 }}
             />
           </div>
-          <button
+          <motion.button
             type="submit"
             className="w-full py-3 px-6 bg-indigo-600 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition duration-300 ease-in-out"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            transition={{ type: "spring", stiffness: 400, damping: 10 }}
           >
             Change Password
-          </button>
+          </motion.button>
 
           {successMsg && (
-            <div className="mt-4 p-3 bg-green-100 text-green-700 rounded-md text-center font-semibold animate-fade-in-down">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }} // Exit requires AnimatePresence to work on unmount
+              className="mt-4 p-3 bg-green-100 text-green-700 rounded-md text-center font-semibold"
+            >
               {successMsg}
-            </div>
+            </motion.div>
           )}
           {error && (
-            <div className="mt-4 p-3 bg-red-100 text-red-700 rounded-md text-center font-semibold animate-fade-in-down">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }} // Exit requires AnimatePresence to work on unmount
+              className="mt-4 p-3 bg-red-100 text-red-700 rounded-md text-center font-semibold"
+            >
               {error}
-            </div>
+            </motion.div>
           )}
         </form>
-      </div>
+      </motion.div>
     </div>
   );
 }

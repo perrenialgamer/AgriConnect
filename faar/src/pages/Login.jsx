@@ -3,7 +3,7 @@ import LoginForm from '../Forms/LoginForm'
 
 function Login() {
   return (
-    <div className='flex items-center justify-center h-screen'>
+    <div>
       <LoginForm />
     </div>
   )

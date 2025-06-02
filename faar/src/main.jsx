@@ -14,7 +14,9 @@ import {
   CropPrices,
   UpdateProfile,
   MyProfile,
-  ChangePassword
+  ChangePassword,
+  Vendors,
+  Stats
 } from './index.js'
 
 
@@ -67,8 +69,13 @@ const router = createBrowserRouter([
 
         },
         {
-            path:"/crops-prices",
+            path:"/crops-prices/:username",
             element:<CropPrices/>
+
+        },
+        {
+            path:"/stats/:cropName",
+            element:<Stats/>
 
         },
         {
@@ -76,6 +83,12 @@ const router = createBrowserRouter([
             element:<ChangePassword/>
 
         },
+        {
+            path:"/vendors",
+            element:<Vendors/>
+
+
+        }
     ]
     }
 

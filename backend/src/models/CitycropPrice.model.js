@@ -20,9 +20,12 @@ const citycropSchema = new mongoose.Schema({
     updatedAt:{
         type: Date,
         default:Date.now()
-    }
+    },
+    updatedBy:
+     { type: mongoose.Types.ObjectId,
+        ref: "User" }
 }, { timestamps: true})
 
-citycropSchema.index({ city: 1, cropName: 1 }, { unique: true });
+citycropSchema.index({ city: 1, cropName: 1,updatedBy:1 }, { unique: true });
 
 export const CityCrop=mongoose.model("CityCrop",citycropSchema)

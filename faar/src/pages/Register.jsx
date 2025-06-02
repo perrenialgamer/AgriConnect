@@ -6,7 +6,7 @@ import UserForm from '../Forms/UserForm'
 
 function Register() {
   return (
-    <div className='flex items-center justify-center h-screen'>
+    <div >
      
      <UserForm />
     </div>
