@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react'; // <-- add useCallback
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion'; // Import motion from Framer Motion
@@ -20,14 +20,15 @@ const UserForm = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const handleLocationChange = ({ state, city }) => {
+  // Memoize the handler to prevent infinite re-renders in StateCitySelector
+  const handleLocationChange = useCallback(({ state, city }) => {
     setFormData((prev) => ({
       ...prev,
       state,
       city,
     }));
     setStatus('');
-  };
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -57,6 +58,8 @@ const UserForm = () => {
       setLoading(false);
     }
   };
+
+  // ...existing
 
   // Framer Motion variants for animations
   const cardVariants = {
