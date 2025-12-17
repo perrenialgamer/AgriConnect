@@ -48,12 +48,15 @@ The platform bridges the information and technology gap in rural agriculture by 
 - Support sustainable farming and community growth
 
 ---
+Create a .env file in the root directory and configure your database connection string and any other environment variables.
 
-## 📂 Installation & Setup
+## 📂 Running the Application
 
 
-# Install backend dependencies
-npm install
+# Start the backend server:
+npm start
 
-# Start the webpage
+# Run the frontend development server:
 npm run dev
+
+This will start both the backend server and the frontend development server. You can access the application at http://localhost:8000 in your web browser.
