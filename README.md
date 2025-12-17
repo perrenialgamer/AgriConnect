@@ -55,5 +55,5 @@ The platform bridges the information and technology gap in rural agriculture by 
 # Install backend dependencies
 npm install
 
-# Start the backend server
+# Start the webpage
 npm run dev
