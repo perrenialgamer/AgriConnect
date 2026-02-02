@@ -11,7 +11,7 @@ The platform bridges the information and technology gap in rural agriculture by 
   Helps farmers plan irrigation, sowing, and harvesting decisions.
 
 - 📈 **Live Crop Market Prices**  
-  Displays updated market rates to support better selling decisions.
+  Displays updated market rates to support better selling decisions.(Vendors could login and change the rate at which they are going to buy particular crop in real time)
 
 - 👨‍🌾 **Expert-Backed Farming Practices**  
   Provides curated agricultural best practices for improved productivity.
